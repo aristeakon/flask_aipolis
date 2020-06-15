@@ -20,7 +20,7 @@
             poiid: $("#poiid-input").val(),
 
         }
-        $.post("http://127.0.0.1:5001/predict1", JSON.stringify(message), function(response){
+        $.post("/predict1", JSON.stringify(message), function(response){
             $("#rating-prediction").text(response.predictions.rating);
            
             console.log(response);
