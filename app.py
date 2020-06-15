@@ -25,9 +25,9 @@ def predict():
     message = request.get_json(force=True)
     inputid=int(message['userid'])
     inputpoi=int(message['poiid'])
-    input1 = tf.constant([[inputid]],dtype=tf.int32)
-    input2 = tf.constant([[inputpoi]],dtype=tf.int32)
-    predictions = model.predict([input1, input2]).tolist()
+   # input1 = tf.constant([[inputid]],dtype=tf.int32)
+   #  input2 = tf.constant([[inputpoi]],dtype=tf.int32)
+   #  predictions = model.predict([input1, input2]).tolist()
    # for x in range(1, 10):
     #   input2 = tf.constant([[x]],dtype=tf.int32)
     #   predictions = model.predict([input1, input2]).tolist()
@@ -35,7 +35,7 @@ def predict():
 
     response = {
         'predictions': {
-            'rating': predictions
+            'rating': inputid
         }
     }
     return jsonify(response)
