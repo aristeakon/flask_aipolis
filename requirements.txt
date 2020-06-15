@@ -2,5 +2,4 @@ tensorflow==1.7.0
 Flask_Cors==3.0.8
 Flask==1.1.2
 gunicorn
-libhdf5-dev
 h5py
