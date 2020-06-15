@@ -1,7 +1,4 @@
-import numpy as np
-import io
 from tensorflow.keras.models import load_model
-import pandas as pd
 import tensorflow as tf
 from flask import request
 from flask import jsonify
