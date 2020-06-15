@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-  return render_template('hi.html')
+  return render_template('index.html')
 
 def get_model():
     global model
