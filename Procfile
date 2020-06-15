@@ -1,0 +1,1 @@
+web: gunicorn predict_appv1:app
