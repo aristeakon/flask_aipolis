@@ -20,5 +20,25 @@ def get_model():
 print(" * Loading Keras model...")
 get_model()
 
+@app.route("/predict1", methods=["POST"])
+def predict():
+    message = request.get_json(force=True)
+    inputid=int(message['userid'])
+    inputpoi=int(message['poiid'])
+    input1 = tf.constant([[inputid]],dtype=tf.int32)
+    input2 = tf.constant([[inputpoi]],dtype=tf.int32)
+    predictions = model.predict([input1, input2]).tolist()
+   # for x in range(1, 10):
+    #   input2 = tf.constant([[x]],dtype=tf.int32)
+    #   predictions = model.predict([input1, input2]).tolist()
+    #   print(predictions)
+
+    response = {
+        'predictions': {
+            'rating': predictions
+        }
+    }
+    return jsonify(response)
+  
 if __name__ == "__main__":
     app.run(debug=False)
