@@ -18,12 +18,11 @@ def predict():
     message = request.get_json(force=True)
     inputid=int(message['userid'])
     inputpoi=int(message['poiid'])
-     global model
-     model = load_model('saved_model_aipolis.h5')
-     print(" * Model loaded!")
-
-     print(" * Loading Keras model...")
-     get_model()
+    global model
+    model = load_model('saved_model_aipolis.h5')
+    print(" * Model loaded!")
+    print(" * Loading Keras model...")
+    get_model()
     input1 = tf.constant([[inputid]],dtype=tf.int32)
     input2 = tf.constant([[inputpoi]],dtype=tf.int32)
      predictions = model.predict([input1, input2]).tolist()
