@@ -25,7 +25,7 @@ def predict():
     get_model()
     input1 = tf.constant([[inputid]],dtype=tf.int32)
     input2 = tf.constant([[inputpoi]],dtype=tf.int32)
-     predictions = model.predict([input1, input2]).tolist()
+    predictions = model.predict([input1, input2]).tolist()
    # for x in range(1, 10):
     #   input2 = tf.constant([[x]],dtype=tf.int32)
     #   predictions = model.predict([input1, input2]).tolist()
