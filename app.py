@@ -10,7 +10,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+  print(" * hi")
   return render_template('index.html')
+  
+@app.route('/admin',methods=['POST','GET'])
+def checkDate():
+    return 'From Date is'+request.args.get('from_date')+ ' To Date is '+ request.args.get('to_date')
 
 
 @app.route("/predict1", methods=["POST"])
