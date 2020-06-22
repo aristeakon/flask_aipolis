@@ -13,10 +13,6 @@ def index():
   print(" * hi")
   return render_template('index.html')
 
-@app.route('/admindate',methods=['POST','GET'])
-def checkDate():
-    return 'From Date is'+request.args.get('from_date')+ ' To Date is '+ request.args.get('to_date')
-
 @app.route("/predict1", methods=["POST"])
 def predict():
     message = request.get_json(force=True)
