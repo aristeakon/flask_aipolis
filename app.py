@@ -46,7 +46,7 @@ def checkTopfivepr():
   inputid=int(request.args.get('userid'))
   poi_data = np.array(list(set(dataset.poi_id)))
   user = np.array([inputid for i in range(len(poi_data))])
-  predictions = model.predict([user, poi_data]) 
+  predictions = model.predict([user, poi_data],steps=1) 
   predictions = np.array([a[0] for a in predictions])
   recommended_poi_ids = (-predictions).argsort()[:5]
   data=[]
