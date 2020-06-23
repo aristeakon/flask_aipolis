@@ -58,8 +58,8 @@ def checkTopfivepr():
       'rating': float(predictions[feature])
     }
     data.append(response) 
-   jsonData=json.dumps(data)
-   return jsonData
+  jsonData=json.dumps(data)
+  return jsonData
   
 @app.route("/predict1", methods=["POST"])
 def predict():
