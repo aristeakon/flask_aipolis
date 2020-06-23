@@ -16,6 +16,10 @@ def index():
   print(" * hi")
   return render_template('index.html')
 
+def get_pois():
+  global dataset
+  dataset = pd.read_csv('data/ratings.csv')
+  
 @app.route('/admin',methods=['POST','GET'])
 def checkDate():
   inputid=int(request.args.get('userid'))
