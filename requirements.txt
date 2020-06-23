@@ -3,3 +3,5 @@ Flask_Cors==3.0.8
 Flask==1.1.2
 gunicorn
 h5py
+pandas
+numpy
