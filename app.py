@@ -12,7 +12,6 @@ app = Flask(__name__)
 @app.route('/')
 def index():
   print(" * hi")
-  return render_template('index.html')
 
 def get_pois():
   global dataset
