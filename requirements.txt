@@ -5,3 +5,4 @@ gunicorn
 h5py
 pandas
 numpy
+scikit-learn
