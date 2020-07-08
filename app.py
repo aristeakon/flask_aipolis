@@ -71,7 +71,7 @@ def returnall():
 
 
 @app.route('/all',methods=['POST','GET'])
-def returnall():
+def returnallold():
   get_pois()
   mobilenet_save_path="saved_model_mf_adam"
   model = load_model(mobilenet_save_path)
