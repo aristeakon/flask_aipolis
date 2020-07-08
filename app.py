@@ -17,23 +17,6 @@ def index():
 def get_pois():
   global dataset
   dataset = pd.read_csv('data/ratings.csv')
-  
-@app.route('/admin',methods=['POST','GET'])
-def checkDate():
-  inputid=int(request.args.get('userid'))
-  inputpoi=int(request.args.get('poiid'))
-  model = load_model('saved_model_aipolis.h5')
-  print(" * Loading Keras model...")
-  print(" * Model loaded!")
-  input1 = tf.constant([[inputid]],dtype=tf.int32)
-  input2 = tf.constant([[inputpoi]],dtype=tf.int32)
-  predictions = model.predict([input1, input2],steps=1).tolist()
-  response = {
-        'predictions': {
-            'rating': predictions
-        }
-    }
-  return jsonify(response)
 
 @app.route('/topfivepr',methods=['POST','GET'])
 def checkTopfivepr():
