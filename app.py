@@ -20,7 +20,7 @@ def get_pois():
 @app.route('/topfivepr',methods=['POST','GET'])
 def checkTopfivepr():
   get_pois()
-  model = load_model('saved_model_aipolis.h5')
+  model = load_model('saved_model_mf_adam.h5')
   print(" * Loading Keras model...")
   print(" * Model loaded!")
   inputid=int(request.args.get('userid'))
