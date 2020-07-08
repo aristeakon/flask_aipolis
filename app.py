@@ -41,20 +41,24 @@ def checkTopfivepr():
   jsonData=json.dumps(data)
   return jsonData
 
-@app.route('/topfivepr1',methods=['POST','GET'])
-def checkTopfivepr1():
+@app.route('/returnall',methods=['POST','GET'])
+def returnall():
   get_pois()
-  mobilenet_save_path="saved_model_mf_adam"
-  model = load_model(mobilenet_save_path)
+  model = load_model('saved_model_mf_adam.h5')
+  print(" * Loading Keras model...")
   print(" * Model loaded!")
   inputid=int(request.args.get('userid'))
-  poi_data = np.array(list(set(dataset.poi_id)))
+  #σημεια ενδιαφέροντος που έχει αξιολογήσει ο χρήστης
+  datasetwith=dataset.loc[dataset['user_id'] == inputid]
+  #σημεια ενδιαφέροντος που δεν έχει αξιολογήσει ο χρήστης
+  datasetnew=dataset[~dataset.poi_id.isin(datasetwith.poi_id)]
+  poi_data = np.array(list(set(datasetnew.poi_id)))
   user = np.array([inputid for i in range(len(poi_data))])
+  #προβλέψεις γι αυτά τα σημεία
   predictions = model.predict([user, poi_data])
   predictions = np.array([a[0] for a in predictions])
+  num=len(predictions)
   recommended_poi_ids = (-predictions).argsort()[:5]
-  print(predictions[recommended_poi_ids])
-  print(poi_data[recommended_poi_ids])
   data=[]
   for feature in recommended_poi_ids:
     response = {
@@ -64,6 +68,7 @@ def checkTopfivepr1():
     data.append(response) 
   jsonData=json.dumps(data)
   return jsonData
+
 
 @app.route('/all',methods=['POST','GET'])
 def returnall():
