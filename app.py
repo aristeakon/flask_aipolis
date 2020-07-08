@@ -32,7 +32,7 @@ def returnall():
   poi_data = np.array(list(set(datasetnew.poi_id)))
   user = np.array([inputid for i in range(len(poi_data))])
   #προβλέψεις γι αυτά τα σημεία
-  predictions = model.predict([user, poi_data],step=1)
+  predictions = model.predict([user, poi_data])
   predictions = np.array([a[0] for a in predictions])
   num=len(predictions)
   recommended_poi_ids = (-predictions).argsort()[:5]
