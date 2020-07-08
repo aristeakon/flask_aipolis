@@ -3,8 +3,6 @@ from tensorflow.keras.models import load_model
 import tensorflow as tf
 from flask import request
 from flask import jsonify
-from flask import Flask
-from flask_cors import CORS
 import numpy as np
 import pandas as pd
 import json
@@ -85,5 +83,34 @@ def predict():
     }
     return jsonify(response)
   
+@app.route('/all',methods=['POST','GET'])
+def returnall():
+  get_pois()
+  mobilenet_save_path="saved_model_mf_adam"
+  model = load_model(mobilenet_save_path)
+  print(" * Loading Keras model...")
+  print(" * Model loaded!")
+  inputid=int(request.args.get('userid'))
+  #σημεια ενδιαφέροντος που έχει αξιολογήσει ο χρήστης
+  datasetwith=dataset.loc[dataset['user_id'] == inputid]
+  #σημεια ενδιαφέροντος που δεν έχει αξιολογήσει ο χρήστης
+  datasetnew=dataset[~dataset.poi_id.isin(datasetwith.poi_id)]
+  poi_data = np.array(list(set(datasetnew.poi_id)))
+  user = np.array([inputid for i in range(len(poi_data))])
+  #προβλέψεις γι αυτά τα σημεία
+  predictions = model.predict([user, poi_data])
+  predictions = np.array([a[0] for a in predictions])
+  num=len(predictions)
+  recommended_poi_ids = (-predictions).argsort()[:5]
+  data=[]
+  for feature in recommended_poi_ids:
+    response = {
+      'poiid':  int(poi_data[feature]),
+      'rating': float(predictions[feature])
+    }
+    data.append(response) 
+  jsonData=json.dumps(data)
+  return jsonData
+
 if __name__ == "__main__":
     app.run(debug=False)
