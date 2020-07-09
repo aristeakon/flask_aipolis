@@ -57,7 +57,7 @@ def checkSinglePrediction():
 def returnall():
   get_pois()
   mobilenet_save_path="saved_model_mf_adam"
-  model = load_model('saved_model_aipolis_sgd.h5')
+  model = load_model('saved_model_mf_adamnew.h5')
   print(" * Loading Keras model...")
   print(" * Model loaded!")
   inputid=int(request.args.get('userid'))
